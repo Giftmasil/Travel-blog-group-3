@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import "./login.css";
 
+/* login function will receive the prop containing the login function and
+attach it to the login button
+*/
+
 export default function Login() {
   return (
     <div className="login">

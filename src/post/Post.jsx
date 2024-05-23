@@ -1,5 +1,9 @@
 import "./post.css"
 
+/* 
+use the props value to render of image for the source, tags, title, description, time
+*/
+
 export default function Post() {
   return (
     <div className="post">

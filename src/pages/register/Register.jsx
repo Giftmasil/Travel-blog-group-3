@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import "./register.css";
 
+/* receive a prop which will be a function attached to the inputs whereby it constantly updates a new user
+infomation in local storage with each keystroke
+*/
+
 export default function Register() {
   return (
     <div className="register">

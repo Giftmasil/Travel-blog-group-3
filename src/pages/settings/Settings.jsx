@@ -1,6 +1,12 @@
 import "./settings.css"
 import Sidebar from "../../components/sidebar/Sidebar"
 
+/* 
+receive the functions as a prop and set it to the update button and delete button 
+approppriately
+
+*/
+
 export default function Settings() {
     return (
       <div className="settings">
