@@ -8,6 +8,7 @@ import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
 import Sidebar from "./components/sidebar/Sidebar";
 
+
 function App() {
   const currentUser = true; // Replace this with actual user authentication logic
   /* 
