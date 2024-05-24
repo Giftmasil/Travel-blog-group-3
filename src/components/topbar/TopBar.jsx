@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import "./topbar.css";
+import { getCurrentUser } from "../../utils/storage";
 
 export default function Topbar() {
-  const user = true;
+  const user = getCurrentUser();
   const location = useLocation();
   const currentPath = location.pathname;
 
