@@ -1,23 +1,35 @@
-import "./post.css"
+// post.jsx
+
+import React from "react";
+import "./post.css";
+import { Link } from "react-router-dom";
 
 /* 
-use the props value to render of image for the source, tags, title, description, time
+use the props value to render image, tags, title, description, and date
 */
 
-export default function Post() {
+export default function Post({ id, img, tags, title, description }) {
+  // Split tags by comma or space
+  const tagArray = tags.split(/[, ]+/);
+
   return (
     <div className="post">
-      <img  className="postImg" src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="posts" />
-      <div className="postInfo">
-        <div className="postCats">
-            <span className="postCat">Music</span>
-            <span className="postCat">Life</span>
+      <Link to={`/post/${id}`} className="link">
+        <img className="postImg" src={img} alt="posts" />
+        <div className="postInfo">
+          <div className="postCats">
+            {tagArray.map((tag, index) => (
+              <span key={index} className="postCat">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <span className="postTitle">{title}</span>
+          <hr />
+          <span className="postDate">{new Date().toLocaleString()}</span>
         </div>
-        <span className="postTitle">Lorem ipsum dolor sit amet consectetur adipisicing elit</span>
-        <hr />
-        <span className="postDate">1 hour ago</span>
-      </div>
-      <p className="postDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. A quibusdam corrupti temporibus molestiae provident obcaecati vel tempore vero? Blanditiis tempora nam nemo optio fuga libero nihil est corrupti harum. Saepe.</p>
+        <p className="postDesc">{description}</p>
+      </Link>
     </div>
-  )
+  );
 }

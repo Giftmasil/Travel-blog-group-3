@@ -62,3 +62,9 @@
     font-size: 35px;
     font-weight: 600;
   }
+
+  .postNotFound {
+    font-size: 5rem;
+    color: red;
+    margin: 10rem;
+  }

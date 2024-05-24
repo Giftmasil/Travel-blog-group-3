@@ -1,30 +1,45 @@
-import "./singlepost.css"
+import React from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import "./singlepost.css";
 
 export default function SinglePost() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const posts = JSON.parse(localStorage.getItem("posts")) || [];
+  const post = posts.find((post) => post.id === id);
+
+  const handleDelete = () => {
+    const updatedPosts = posts.filter((p) => p.id !== id);
+    localStorage.setItem("posts", JSON.stringify(updatedPosts));
+    navigate("/");
+  };
+
+  if (!post) {
+    return <div className="postNotFound">Post not found</div>;
+  }
+
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-      <img
-          className="singlePostImg"
-          src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-          alt="woods"
-        />
+        <img className="singlePostImg" src={post.image} alt="post" />
         <h1 className="singlePostTitle">
-          Lorem ipsum dolor
+          {post.title}
           <div className="singlePostEdit">
-            <i className="singlePostIcon far fa-edit"></i>
-            <i className="singlePostIcon far fa-trash-alt"></i>
+            <Link to={`/write/${id}`} className="singlePostIconLink">
+              <i className="singlePostIcon far fa-edit"></i>
+            </Link>
+            <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
           </div>
         </h1>
         <div className="singlePostInfo">
-            {/* try to get the author name from the username info */}
-            <span className="singlePostAuthor">Author: <b>Gift</b></span>
-            {/* try to get the date */}
-            <span className="singlePostDate">1 hour ago</span>
+          {post.tags.split(/[, ]+/).map((tag, index) => (
+            <span key={index} className="singlePostCat">{tag}</span>
+          ))}
+          <span className="singlePostDate">{new Date(post.date).toLocaleString()}</span>
         </div>
-        <p className="singlePostDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At illum sunt facere nam modi quis deleniti, necessitatibus vel hic? A ex aperiam, autem labore molestias iure cum laborum alias ipsam!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. At illum sunt facere nam modi quis deleniti, necessitatibus vel hic? A ex aperiam, autem labore molestias iure cum laborum alias ipsam!</p>
+        <p className="singlePostDesc">{post.description}</p>
       </div>
     </div>
-  )
+  );
 }
+

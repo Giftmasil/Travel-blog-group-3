@@ -1,22 +1,36 @@
-import Post from "../../post/Post"
-import "./posts.css"
+import React from "react";
+import Post from "../../post/Post";
+import "./posts.css";
+import { nanoid } from "nanoid";
+import { Link } from "react-router-dom";
 
+export default function Posts() {
+  const posts = JSON.parse(localStorage.getItem("posts"));
+  
+  let postContent;
 
-/* 
-after receiving the array of posts it should map over the array and render the post while giving props
-values of of the object {image,tags, title, time, description}
-*/
+  if (!posts || posts.length === 0) {
+    postContent = (
+      <div className="noPost">
+        <h1>No posts</h1>
+        <Link className="link" to="/write">
+          <i className="icon fa-solid fa-plus"></i>
+        </Link>
+      </div>
+    );
+  } else {
+    postContent = posts.map((post) => (
+      <Post
+        key={post.id || nanoid()}
+        id={post.id || nanoid()}
+        img={post.image}
+        tags={post.tags}
+        title={post.title}
+        description={post.description}
+      />
+    ));
+  }
 
-export default function posts() {
-  //come later to map over the post according from post where it will be stored
-  return (
-    <div className='posts'>
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-    </div>
-  )
+  return <div className="posts">{postContent}</div>;
 }
+

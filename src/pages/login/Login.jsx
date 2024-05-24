@@ -11,7 +11,6 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     const users = getUsers();
-    console.log(users)
     const user = users.find(u => u.email === email && u.password === password);
     if (user) {
       setCurrentUser(user);

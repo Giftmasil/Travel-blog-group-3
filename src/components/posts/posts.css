@@ -4,3 +4,17 @@
     flex-wrap: wrap;
     margin: 20px;
 }
+
+.icon {
+    color: tomato;
+    font-size: 3rem;
+    border: 2px solid tomato;
+    border-radius: 50%;
+}
+
+.noPost {
+    margin: auto;
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 2rem;
+}

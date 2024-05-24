@@ -1,3 +1,5 @@
+// App.js
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Topbar from "./components/topbar/TopBar";
@@ -10,10 +12,18 @@ import Write from "./pages/write/Write";
 import Sidebar from "./components/sidebar/Sidebar";
 import { getCurrentUser } from "./utils/storage";
 
+function App() { 
+  const [currentUser, setCurrentUser] = React.useState(getCurrentUser());
 
-function App() {
-  const currentUser = getCurrentUser();
-  console.log(currentUser)
+  React.useEffect(() => {
+    const handleStorageChange = () => {
+      setCurrentUser(getCurrentUser());
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   return (
     <Router>
