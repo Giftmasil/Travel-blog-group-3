@@ -1,7 +1,7 @@
 // sidebar.jsx
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./sidebar.css";
 
 export default function Sidebar() {
@@ -24,7 +24,7 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
-          {["Destination", "Tree", "Sport", "Style", "Cinema", "Tech"].map((tag) => (
+          {["Destination", "Travel Tips", "Activities", "Adventure", "Relaxation", "Cultural"].map((tag) => (
             <li
               key={tag}
               className="sidebarListItem"
@@ -44,6 +44,7 @@ export default function Sidebar() {
         <a href="https://www.pinterest.com/fakepinterest/"><i className="topIcon fab fa-pinterest-square"></i></a>
         <a href="https://twitter.com/_muuo11_"><i className="topIcon fab fa-twitter-square"></i></a>
       </div>
+      <div className="Contact"><Link className="link" to="/contact">Contact us</Link></div>
     </div>
   );
 }

@@ -12,14 +12,10 @@
 
 .headerTitleSm {
   position: absolute;
-  top: 18%;
-  font-size: 20px;
 }
 
 .headerTitleLg {
   position: absolute;
-  top: 20%;
-  font-size: 100px;
 }
 
 .headerImg {
@@ -27,4 +23,26 @@
   height: 100%;
   margin-top: -50px;
   object-fit: cover;
+}
+
+@media screen and (min-width: 200px) {
+  .headerTitleSm {
+    top: 13%;
+    font-size: 15px;
+  }
+  .headerTitleLg {
+    top: 15%;
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 676px) {
+  .headerTitleSm {
+    font-size: clamp(0.5rem, 20px, 1.3rem);
+    top: 28%;
+  }
+  .headerTitleLg {
+    top: 30%;
+    font-size: clamp(1rem,100px,5rem);
+  }
 }

@@ -72,12 +72,12 @@
     width: 30%;
   }
   
-  .settingsForm > input {
+  .Inputs {
     color: rgb(104, 103, 103);
     margin-top: 10px;
     margin-bottom: 10px;
-    height: 30px;
     border: none;
+    border-radius: 10px;
     border-bottom: 1px solid lightgray;
     padding: 1.3rem;
     &:focus {

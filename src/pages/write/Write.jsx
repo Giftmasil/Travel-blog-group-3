@@ -37,16 +37,25 @@ export default function Write() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const posts = JSON.parse(localStorage.getItem("posts")) || [];
-    if (id) {
-      // Editing an existing post
-      const updatedPosts = posts.map((p) => (p.id === id ? post : p));
-      localStorage.setItem("posts", JSON.stringify(updatedPosts));
+    const confirmPublish = window.confirm("Are you sure you want to publish this post?")
+    if (post.image === "" || post.tags === "" || post.title === "" || post.description === "") {
+      alert("Please fill in all fields.");
     } else {
-      // Creating a new post
-      const newPost = { ...post, date: new Date().toISOString() };
-      localStorage.setItem("posts", JSON.stringify([...posts, newPost]));
+      if (confirmPublish) {
+        if (id) {
+          // Editing an existing post
+          const updatedPosts = posts.map((p) => (p.id === id ? post : p));
+          localStorage.setItem("posts", JSON.stringify(updatedPosts));
+          navigate("/");
+        } else {
+          // Creating a new post
+          const newPost = { ...post, date: new Date().toISOString() };
+          localStorage.setItem("posts", JSON.stringify([...posts, newPost]));
+          navigate("/");
+        }
+      }
     }
-    navigate("/");
+    
   };
 
   return (

@@ -1,5 +1,5 @@
 .posts {
-    flex: 9;
+    width: 100vw;
     display: flex;
     flex-wrap: wrap;
     margin: 20px;
@@ -16,7 +16,6 @@
     margin: auto;
     text-align: center;
     font-size: 3rem;
-    margin-top: 2rem;
     display: flex;
     flex-flow: column nowrap;
     &:first-child {

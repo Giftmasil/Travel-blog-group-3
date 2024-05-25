@@ -1,4 +1,3 @@
-// topbar.jsx
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./topbar.css";
@@ -20,84 +19,110 @@ export default function Topbar() {
     }
   };
 
+  const handleTagClick = (tag) => {
+    navigate(`/tags?tag=${tag}`);
+  };
+
   const handleLogout = () => {
-    // Clear current user from local storage
     clearCurrentUser();
-    // Navigate to home page after logout
     navigate("/login");
   };
 
   return (
     <div className="top">
-      <div className="topLeft">
-        <a href="https://www.facebook.com/TheDummyPage/"><i className="topIcon fab fa-facebook-square"></i></a>
-        <a href="https://www.instagram.com/_mas.ila_/"><i className="topIcon fab fa-instagram-square"></i></a>
-        <a href="https://www.pinterest.com/fakepinterest/"><i className="topIcon fab fa-pinterest-square"></i></a>
-        <a href="https://twitter.com/_muuo11_"><i className="topIcon fab fa-twitter-square"></i></a>
-      </div>
-      <div className="topCenter">
-        <ul className="topList">
-          <li className="topListItem">
-            <Link className="link" to="/" >
-              HOME
-            </Link>
-          </li>
-          <li className="topListItem"><Link className="link" to="/about" >
-              ABOUT
-            </Link></li>
-          <li className="topListItem">
-            <Link className="link" to="/contact">
-              CONTACT
-            </Link>
-          </li>
-          <li className="topListItem">
-            <Link className="link" to="/write">
-              POST
-            </Link>
-          </li>
-          {user && <li className="topListItem" onClick={handleLogout}>LOGOUT</li>}
+      <div className="topMostListContainer">
+        <ul className="topMostList">
+          <li className="topTitle font">Discover Travels</li>
+          <div className="topRight">
+            {user ? (
+              <>
+                <Link className="link" to="/settings">
+                  <img
+                    className="topImg"
+                    src={user.profile || "https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"}
+                    alt="user"
+                  />
+                </Link>
+                <form className="Search smallSearch" onSubmit={handleSearch}>
+                <button type="submit" className="searchButton">
+                <i className="topSearchIcon color fas fa-search"></i>
+                </button>
+                <input
+                  className="searchInput"
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search..."
+                />
+          </form>
+                <li className="topListItem logOut" onClick={handleLogout}>LOGOUT</li>
+              </>
+            ) : (
+              currentPath !== "/login" &&
+              currentPath !== "/register" && (
+                <div className="topRight">
+                  <ul className="topList">
+                    <li className="topListItem">
+                      <Link className="link" to="/login">
+                        LOGIN
+                      </Link>
+                    </li>
+                    <li className="topListItem">
+                      <Link className="link" to="/register">
+                        REGISTER
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )
+            )}
+          </div>
         </ul>
       </div>
-      <div className="topRight">
-        {user ? (
-          <div className="topRight">
-            <Link className="link" to="/settings">
-              <img
-                className="topImg"
-                src={user.profile || "https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"}
-                alt="user"
-              />
-            </Link>
-          </div>
-        ) : (
-          currentPath !== "/login" &&
-          currentPath !== "/register" && (
-            <div className="topRight">
-              <ul className="topList">
-                <li className="topListItem">
-                  <Link className="link" to="/login">
-                    LOGIN
-                  </Link>
-                </li>
-                <li className="topListItem">
-                  <Link className="link" to="/register">
-                    REGISTER
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          )
-        )}
-        <form className="Search" onSubmit={handleSearch}>
-          <i className="topSearchIcon fas fa-search"></i>
-          <input
-            className="searchInput"
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search..."
-          />
-        </form>
+      <div className="topNavigation">
+        <div className="topLeft">
+          <a href="https://www.facebook.com/TheDummyPage/"><i className="topIcon fab fa-facebook-square"></i></a>
+          <a href="https://www.instagram.com/_mas.ila_/"><i className="topIcon fab fa-instagram-square"></i></a>
+          <a href="https://www.pinterest.com/fakepinterest/"><i className="topIcon fab fa-pinterest-square"></i></a>
+          <a href="https://twitter.com/_muuo11_"><i className="topIcon fab fa-twitter-square"></i></a>
+        </div>
+        <div className="topCenter">
+          <ul className="topList">
+            <li className="topListItem">
+              <Link className="link" to="/" >
+                ALL
+              </Link>
+            </li>
+            {["Destination", "Travel Tips", "Activities"].map((tag) => (
+            <li
+              key={tag}
+              className="topListItem"
+              onClick={() => handleTagClick(tag)}
+            >
+              {tag}
+            </li>
+          ))}
+            <li className="topListItem">
+              <Link className="link" to="/write">
+                CREATE
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="topRight">
+          <form className="Search bigSearch" onSubmit={handleSearch}>
+            <button type="submit" className="searchButton">
+              <i className="topSearchIcon fas fa-search"></i>
+            </button>
+            <input
+              className="searchInput"
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search..."
+            />
+          </form>
+        </div>
       </div>
     </div>
   );

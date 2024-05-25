@@ -4,9 +4,6 @@ import React from "react";
 import "./post.css";
 import { Link } from "react-router-dom";
 
-/* 
-use the props value to render image, tags, title, description, and date
-*/
 
 export default function Post({ id, img, tags, title, description }) {
   // Split tags by comma or space
