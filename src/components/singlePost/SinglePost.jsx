@@ -1,3 +1,4 @@
+// singlePost.jsx
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./singlepost.css";
@@ -9,10 +10,14 @@ export default function SinglePost() {
   const post = posts.find((post) => post.id === id);
 
   const handleDelete = () => {
-    const updatedPosts = posts.filter((p) => p.id !== id);
-    localStorage.setItem("posts", JSON.stringify(updatedPosts));
-    navigate("/");
+    const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+    if (confirmDelete) {
+      const updatedPosts = posts.filter((p) => p.id !== id);
+      localStorage.setItem("posts", JSON.stringify(updatedPosts));
+      navigate("/");
+    }
   };
+  
 
   if (!post) {
     return <div className="postNotFound">Post not found</div>;
@@ -26,7 +31,7 @@ export default function SinglePost() {
           {post.title}
           <div className="singlePostEdit">
             <Link to={`/write/${id}`} className="singlePostIconLink">
-              <i className="singlePostIcon far fa-edit"></i>
+              <i className="singlePostIcon edit far fa-edit"></i>
             </Link>
             <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
           </div>

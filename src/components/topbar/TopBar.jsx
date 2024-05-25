@@ -1,11 +1,31 @@
-import { Link, useLocation } from "react-router-dom";
+// topbar.jsx
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./topbar.css";
-import { getCurrentUser } from "../../utils/storage";
+import { getCurrentUser, clearCurrentUser } from "../../utils/storage";
 
 export default function Topbar() {
   const user = getCurrentUser();
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname;
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?query=${searchQuery}`);
+    } else {
+      navigate("/");
+    }
+  };
+
+  const handleLogout = () => {
+    // Clear current user from local storage
+    clearCurrentUser();
+    // Navigate to home page after logout
+    navigate("/login");
+  };
 
   return (
     <div className="top">
@@ -25,13 +45,17 @@ export default function Topbar() {
           <li className="topListItem"><Link className="link" to="/about" >
               ABOUT
             </Link></li>
-          <li className="topListItem">CONTACT</li>
           <li className="topListItem">
-            <Link className="link" to="/write">
-              WRITE
+            <Link className="link" to="/contact">
+              CONTACT
             </Link>
           </li>
-          {user && <li className="topListItem">LOGOUT</li>}
+          <li className="topListItem">
+            <Link className="link" to="/write">
+              POST
+            </Link>
+          </li>
+          {user && <li className="topListItem" onClick={handleLogout}>LOGOUT</li>}
         </ul>
       </div>
       <div className="topRight">
@@ -40,14 +64,10 @@ export default function Topbar() {
             <Link className="link" to="/settings">
               <img
                 className="topImg"
-                src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                alt=""
+                src={user.profile || "https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"}
+                alt="user"
               />
             </Link>
-            <div className="Search">
-                <i className="topSearchIcon fas fa-search"></i>
-                <input className="searchInput" type="text"/>
-              </div>
           </div>
         ) : (
           currentPath !== "/login" &&
@@ -65,13 +85,19 @@ export default function Topbar() {
                   </Link>
                 </li>
               </ul>
-              <div className="Search">
-                <i className="topSearchIcon fas fa-search"></i>
-                <input className="searchInput" type="text"/>
-              </div>
             </div>
           )
         )}
+        <form className="Search" onSubmit={handleSearch}>
+          <i className="topSearchIcon fas fa-search"></i>
+          <input
+            className="searchInput"
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search..."
+          />
+        </form>
       </div>
     </div>
   );

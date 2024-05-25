@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getUsers, saveUsers } from "../../utils/storage";
 
 export default function Register() {
-  const [user, setUser] = useState({ username: "", email: "", password: "" });
+  const [user, setUser] = useState({profile: "", username: "", email: "", password: "" });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -27,6 +27,8 @@ export default function Register() {
       <div className="dark">
         <span className="registerTitle">Register</span>
         <form className="registerForm" onSubmit={handleSubmit}>
+          <label htmlFor="username">Profile Picture</label>
+          <input id="profile" className="registerInput" type="text" placeholder="profile url.." onChange={handleChange} />
           <label htmlFor="username">Username</label>
           <input id="username" className="registerInput" type="text" placeholder="FurryLover1" onChange={handleChange} />
           <label htmlFor="email">Email</label>

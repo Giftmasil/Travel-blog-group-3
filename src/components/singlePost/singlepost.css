@@ -31,10 +31,10 @@
     cursor: pointer;
   }
   
-  .singlePostIcon:first-child {
+  .singlePostIcon.edit {
     color: teal;
   }
-  .singlePostIcon:last-child {
+  .singlePostIcon {
     color: tomato;
   }
   

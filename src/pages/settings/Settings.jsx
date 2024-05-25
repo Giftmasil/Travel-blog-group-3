@@ -3,11 +3,6 @@ import Sidebar from "../../components/sidebar/Sidebar"
 import { useState, useEffect } from "react";
 import { getUsers, saveUsers, getCurrentUser, setCurrentUser, clearCurrentUser } from "../../utils/storage";
 import { useNavigate } from "react-router-dom";
-/* 
-receive the functions as a prop and set it to the update button and delete button 
-approppriately
-
-*/
 
 export default function Settings() {
   const currentUser = getCurrentUser();
@@ -40,7 +35,7 @@ export default function Settings() {
             <label>Profile Picture</label>
             <div className="settingsPP">
               <img
-                src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                src={user.profile || "https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"}
                 alt="profile"
               />
               <label htmlFor="fileInput">
@@ -48,9 +43,10 @@ export default function Settings() {
               </label>
               <input
                 id="fileInput"
-                type="file"
-                style={{ display: "none" }}
+                placeholder="image url..."
+                type="text"
                 className="settingsPPInput"
+                onChange={(e) => setUser({ ...user, profile: e.target.value })}
               />
             </div>
             <label>Username</label>

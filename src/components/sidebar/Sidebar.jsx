@@ -1,6 +1,16 @@
-import "./sidebar.css"
+// sidebar.jsx
+
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./sidebar.css";
 
 export default function Sidebar() {
+  const navigate = useNavigate();
+
+  const handleTagClick = (tag) => {
+    navigate(`/tags?tag=${tag}`);
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebarItem">
@@ -14,12 +24,15 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
-          <li className="sidebarListitem">Life</li>
-          <li className="sidebarListitem">Music</li>
-          <li className="sidebarListitem">Sport</li>
-          <li className="sidebarListitem">Style</li>
-          <li className="sidebarListitem">Cinema</li>
-          <li className="sidebarListitem">Tech</li>
+          {["Destination", "Tree", "Sport", "Style", "Cinema", "Tech"].map((tag) => (
+            <li
+              key={tag}
+              className="sidebarListItem"
+              onClick={() => handleTagClick(tag)}
+            >
+              {tag}
+            </li>
+          ))}
         </ul>
       </div>
       <div className="sidebarItem">
@@ -32,5 +45,5 @@ export default function Sidebar() {
         <a href="https://twitter.com/_muuo11_"><i className="topIcon fab fa-twitter-square"></i></a>
       </div>
     </div>
-  )
+  );
 }

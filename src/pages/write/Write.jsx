@@ -1,12 +1,12 @@
 // write.jsx
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./write.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { nanoid } from "nanoid";
 
 export default function Write() {
   const navigate = useNavigate();
+  const { id } = useParams(); // Get the post ID from the URL
   const [post, setPost] = useState({
     id: nanoid(),
     image: "",
@@ -14,6 +14,17 @@ export default function Write() {
     title: "",
     description: "",
   });
+
+  useEffect(() => {
+    if (id) {
+      // If there's an ID, we are editing an existing post
+      const posts = JSON.parse(localStorage.getItem("posts")) || [];
+      const existingPost = posts.find((post) => post.id === id);
+      if (existingPost) {
+        setPost(existingPost);
+      }
+    }
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,20 +36,17 @@ export default function Write() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Include current date
-    const newPost = { ...post, date: new Date().toISOString() };
-    // Save post data to local storage
     const posts = JSON.parse(localStorage.getItem("posts")) || [];
-    localStorage.setItem("posts", JSON.stringify([...posts, newPost]));
-    // Clear form fields after submission
-    setPost({
-      id: nanoid(),
-      image: "",
-      tags: "",
-      title: "",
-      description: "",
-    });
-    navigate("/")
+    if (id) {
+      // Editing an existing post
+      const updatedPosts = posts.map((p) => (p.id === id ? post : p));
+      localStorage.setItem("posts", JSON.stringify(updatedPosts));
+    } else {
+      // Creating a new post
+      const newPost = { ...post, date: new Date().toISOString() };
+      localStorage.setItem("posts", JSON.stringify([...posts, newPost]));
+    }
+    navigate("/");
   };
 
   return (
