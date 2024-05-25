@@ -1,5 +1,3 @@
-// utils/storage.js
-
 // Users Local Storage Key
 const USERS_KEY = 'users';
 const CURRENT_USER_KEY = 'currentUser';

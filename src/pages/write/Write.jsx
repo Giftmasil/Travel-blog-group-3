@@ -1,4 +1,3 @@
-// write.jsx
 import React, { useState, useEffect } from "react";
 import "./write.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -37,7 +36,7 @@ export default function Write() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const posts = JSON.parse(localStorage.getItem("posts")) || [];
-    const confirmPublish = window.confirm("Are you sure you want to publish this post?")
+    const confirmPublish = window.confirm("You are about to make this post public.Click to proceed.")
     if (post.image === "" || post.tags === "" || post.title === "" || post.description === "") {
       alert("Please fill in all fields.");
     } else {
