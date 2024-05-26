@@ -54,7 +54,7 @@ export default function Topbar() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search..."
                 />
-          </form>
+                </form>
                 <li className="topListItem logOut" onClick={handleLogout}>LOGOUT</li>
               </>
             ) : (
@@ -63,12 +63,12 @@ export default function Topbar() {
                 <div className="topRight">
                   <ul className="topList">
                     <li className="topListItem">
-                      <Link className="link" to="/login">
+                      <Link className="loginLink" to="/login">
                         LOGIN
                       </Link>
                     </li>
                     <li className="topListItem">
-                      <Link className="link" to="/register">
+                      <Link className="registerLink" to="/register">
                         REGISTER
                       </Link>
                     </li>

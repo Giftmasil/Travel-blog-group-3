@@ -131,6 +131,11 @@
   margin: 0;
 }
 
+.registerLink, .loginLink{
+  text-decoration: none;
+  color: whitesmoke;
+}
+
 
 @media screen and (min-width: 200px) {
   .topNavigation{display: none;}

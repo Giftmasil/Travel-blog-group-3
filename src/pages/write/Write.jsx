@@ -111,6 +111,7 @@ export default function Write() {
         <button className="writeSubmit" type="submit">
           Publish
         </button>
+        <div className="chatBot"><a href="https://travelblogpy-vz9vnekzujeghramhycqxz.streamlit.app/"><i class="fa-solid fa-robot"></i></a></div>
       </form>
     </div>
   );

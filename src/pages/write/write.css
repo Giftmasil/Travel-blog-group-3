@@ -72,6 +72,16 @@
     }
   }
 
+  .chatBot {
+    font-size: 3rem;
+  }
+  
+
+  a {
+    text-decoration: none;
+    color: rgb(1, 67, 67);
+  }
+
   @media screen and (min-width: 200px) {
     .writeImg {
       width: 70vw;
@@ -83,6 +93,9 @@
     }
     .writeSubmit {
       margin-left: 10rem;
+    }
+    .chatBot {
+      margin-left: 10.5rem;
     }
   }
 
@@ -98,6 +111,9 @@
     .writeSubmit {
       margin-left: 16rem;
     }
+    .chatBot {
+      margin-left: 16.5rem;
+    }
   }
 
   @media screen and (min-width: 700px) {
@@ -111,6 +127,9 @@
     }
     .writeSubmit {
       margin-left: 27rem;
+    }
+    .chatBot {
+      margin-left: 27.5rem;
     }
   }
 
@@ -127,5 +146,10 @@
       position: absolute;
       top: 20px;
       right: 50px;
+    }
+    .chatBot {
+      position: absolute;
+      top: 100px;
+      right: 61px;
     }
   }
