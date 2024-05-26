@@ -136,6 +136,15 @@
   color: whitesmoke;
 }
 
+.mainChatBot {
+  margin-right: 1rem;
+  color: #444;
+  font-size: 2rem;
+}
+
+.topAnchor {
+  color: rgb(41, 27, 27);
+}
 
 @media screen and (min-width: 200px) {
   .topNavigation{display: none;}
@@ -145,6 +154,7 @@
   .bigSearch {display: none;}
   .font {font-size: 20px;}
   .color {color: whitesmoke;}
+  .mainChatBot {display: none;}
 }
 
 @media screen and (min-width: 720px) {
@@ -154,5 +164,41 @@
   .font {
     font-size: 50px;
     margin-left: 2.5rem;
+  }
+  .animations {
+    font-size: 1rem;
+    background-color: white;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding: .75rem;
+    animation: 5s ease-in-out 1s normal forwards slide;
+  }
+
+  .mainChatBot {
+    display: block;
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(-200%);
+  }
+  20% {
+    transform: translateY(50%);
+  }
+  40% {
+    transform: translateY(-50%);
+  }
+  60% {
+    transform: translateY(50%);
+  }
+  80% {
+    transform: translateY(-50%);
+  }
+  99% {
+    transform: translateY(0);
+  }
+  100% {
+    display: none;
   }
 }
