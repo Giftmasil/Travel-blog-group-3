@@ -2,7 +2,6 @@
     width: 100vw;
     display: flex;
     flex-wrap: wrap;
-    margin: 20px;
 }
 
 .icon {
@@ -20,5 +19,16 @@
     flex-flow: column nowrap;
     &:first-child {
         color: crimson;
+    }
+}
+
+@media screen and (min-width: 200px) {
+    .posts {
+        margin: 5px;
+    }
+}
+@media screen and (min-width: 576px) {
+    .posts {
+        margin: 20px;
     }
 }

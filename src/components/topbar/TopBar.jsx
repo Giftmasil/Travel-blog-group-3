@@ -33,9 +33,11 @@ export default function Topbar() {
       <div className="topMostListContainer">
         <ul className="topMostList">
           <li className="topTitle font">Discover Travels</li>
+          <div className="animations">Chatbot</div>
           <div className="topRight">
             {user ? (
               <>
+                <div className="mainChatBot"><a className="topAnchor" href="https://travelblogpy-xu5up8uddabzke3il6uk8e.streamlit.app/"><i class="fa-solid fa-robot"></i></a></div>
                 <Link className="link" to="/settings">
                   <img
                     className="topImg"
